@@ -27,6 +27,9 @@ RUN apt-get update \
 
 # Install Go development tools
 # air pinned: v1.67.2+ requires go >= 1.26, image runs GO_VERSION with GOTOOLCHAIN=local
+# GOPROXY/GOSUMDB: sum.golang.org is unreachable from some networks; use a proxy.
+ENV GOPROXY=https://goproxy.cn,direct
+ENV GOSUMDB=off
 RUN go install github.com/air-verse/air@v1.67.1 \
     && go install github.com/go-delve/delve/cmd/dlv@latest
 
@@ -50,6 +53,16 @@ WORKDIR /workspace
 COPY go.mod go.sum ./
 RUN go mod download
 RUN mkdir -p /go/build-cache /go/pkg/mod && chmod -R 0777 /go/build-cache /go/pkg/mod
+
+# Bake a production binary at build time. Sandbox services that mount /workspace
+# still use `go run` from the mounted source; deployment (docker/docker-compose.yml)
+# runs this binary directly with no source mount and no Go caches.
+# VERSION is injected via -X main.version (same scheme as .goreleaser.yaml) so the
+# dev-mode "update available" simulation in handler_version.go stays off.
+ARG VERSION=0.0.0
+ENV SKILLSHARE_VERSION=${VERSION}
+COPY . .
+RUN go build -trimpath -ldflags="-s -w -X main.version=${VERSION}" -o /usr/local/bin/skillshare ./cmd/skillshare
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash", "-c", "./scripts/test.sh"]

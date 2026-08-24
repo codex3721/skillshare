@@ -1,0 +1,35 @@
+# Deployment compose — runs the skillshare UI server using the binary baked
+# into the sandbox image (no source mount, no Go caches, fast startup).
+#
+# Usage (from this docker/ folder):
+#   docker compose up -d --build   # build image and start in background
+#   docker compose logs -f          # follow logs
+#   docker compose down            # stop and remove container
+#
+# Persistence:
+#   ./volumes/config  -> ~/.config/skillshare  (config.yaml + skills source)
+#   UI cache is container-local (re-populated from the image on each start).
+
+services:
+  skillshare:
+    image: skillshare
+    container_name: skillshare
+    hostname: skillshare
+    build:
+      context: ..
+      dockerfile: docker/sandbox/Dockerfile
+    command: ["skillshare", "ui", "-g", "--no-open", "--host", "0.0.0.0"]
+    ports:
+      - "19420:19420"
+    environment:
+      HOME: /home/skillshare
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      GITLAB_TOKEN: ${GITLAB_TOKEN:-}
+      BITBUCKET_TOKEN: ${BITBUCKET_TOKEN:-}
+      BITBUCKET_USERNAME: ${BITBUCKET_USERNAME:-}
+      SKILLSHARE_GIT_TOKEN: ${SKILLSHARE_GIT_TOKEN:-}
+    volumes:
+      - ./volumes/config:/home/skillshare/.config/skillshare
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped

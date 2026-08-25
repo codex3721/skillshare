@@ -1,6 +1,11 @@
 # Deployment compose — runs the skillshare UI server using the binary baked
 # into the sandbox image (no source mount, no Go caches, fast startup).
 #
+# `name` is set explicitly to avoid clashing with other projects whose
+# directory is also called `docker/` — Compose would otherwise reuse the
+# same project name (and the same `docker_default` network) for both stacks.
+name: skillshare
+
 # Build both architectures once (from repo root):
 #   docker buildx build --platform linux/amd64 -t skillshare:amd64 --load \
 #       -f docker/sandbox/Dockerfile .

@@ -4,8 +4,7 @@
 # `name` is set explicitly to avoid clashing with other projects whose
 # directory is also called `docker/` — Compose would otherwise reuse the
 # same project name (and the same `docker_default` network) for both stacks.
-name: skillshare
-
+#
 # Build both architectures once (from repo root):
 #   docker buildx build --platform linux/amd64 -t skillshare:amd64 --load \
 #       -f docker/sandbox/Dockerfile .
@@ -20,6 +19,8 @@ name: skillshare
 #   ./volumes/config  -> ~/.config/skillshare  (config.yaml + skills source)
 #   UI cache is container-local (re-populated from the image on each start).
 
+name: skillshare
+
 services:
   skillshare:
     # ARC=amd64 on an x86_64 host.
@@ -33,14 +34,10 @@ services:
     ports:
       - "19420:19420"
     environment:
-      HOME: /home/skillshare
-      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
-      GITLAB_TOKEN: ${GITLAB_TOKEN:-}
-      BITBUCKET_TOKEN: ${BITBUCKET_TOKEN:-}
-      BITBUCKET_USERNAME: ${BITBUCKET_USERNAME:-}
-      SKILLSHARE_GIT_TOKEN: ${SKILLSHARE_GIT_TOKEN:-}
+      HOME: /root
+      GIT_SSL_NO_VERIFY: ${GIT_SSL_NO_VERIFY:-true}
     volumes:
-      - ./volumes/config:/home/skillshare/.config/skillshare
+      - ./volumes/config:/root/.config/skillshare
     security_opt:
       - no-new-privileges:true
     restart: unless-stopped

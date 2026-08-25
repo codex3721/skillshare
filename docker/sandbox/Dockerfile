@@ -16,6 +16,9 @@ RUN pnpm run build
 # Stage 2: Go sandbox with pre-built frontend
 FROM golang:${GO_VERSION}-bookworm
 
+# Use a CN mirror: deb.debian.org is intermittently unreachable from some networks.
+RUN sed -i 's|deb.debian.org|mirrors.tuna.tsinghua.edu.cn|g; s|security.debian.org|mirrors.tuna.tsinghua.edu.cn|g' \
+        /etc/apt/sources.list.d/debian.sources
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
         bash git ca-certificates curl jq sudo procps \
@@ -59,10 +62,13 @@ RUN mkdir -p /go/build-cache /go/pkg/mod && chmod -R 0777 /go/build-cache /go/pk
 # runs this binary directly with no source mount and no Go caches.
 # VERSION is injected via -X main.version (same scheme as .goreleaser.yaml) so the
 # dev-mode "update available" simulation in handler_version.go stays off.
-ARG VERSION=0.0.0
+ARG VERSION=0.20.25
+ARG TARGETARCH
 ENV SKILLSHARE_VERSION=${VERSION}
 COPY . .
-RUN go build -trimpath -ldflags="-s -w -X main.version=${VERSION}" -o /usr/local/bin/skillshare ./cmd/skillshare
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=${TARGETARCH} \
+    go build -trimpath -ldflags="-s -w -X main.version=${VERSION}" \
+    -o /usr/local/bin/skillshare ./cmd/skillshare
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["bash", "-c", "./scripts/test.sh"]

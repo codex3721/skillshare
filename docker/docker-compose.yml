@@ -1,10 +1,15 @@
 # Deployment compose — runs the skillshare UI server using the binary baked
 # into the sandbox image (no source mount, no Go caches, fast startup).
 #
-# Usage (from this docker/ folder):
-#   docker compose up -d --build   # build image and start in background
-#   docker compose logs -f          # follow logs
-#   docker compose down            # stop and remove container
+# Build both architectures once (from repo root):
+#   docker buildx build --platform linux/amd64 -t skillshare:amd64 --load \
+#       -f docker/sandbox/Dockerfile .
+#   docker buildx build --platform linux/arm64 -t skillshare:arm64 --load \
+#       -f docker/sandbox/Dockerfile .
+#   docker save skillshare:amd64 skillshare:arm64 -o skillshare-images.tar
+#
+# On the target machine (after `docker load -i skillshare-images.tar`):
+#   cd docker && docker compose up -d
 #
 # Persistence:
 #   ./volumes/config  -> ~/.config/skillshare  (config.yaml + skills source)
@@ -12,7 +17,8 @@
 
 services:
   skillshare:
-    image: skillshare
+    # ARC=amd64 on an x86_64 host.
+    image: skillshare:${ARC:-arm64}
     container_name: skillshare
     hostname: skillshare
     build:

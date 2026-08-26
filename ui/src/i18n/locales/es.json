@@ -58,7 +58,7 @@
   "api.error.unauthorized": "No tienes permiso para realizar esta acción.",
   "api.error.validation": "Algunos campos requieren atención.",
   "api.invalidJson": "Respuesta JSON inválida: {snippet}",
-  "app.name": "skillshare",
+  "app.name": "Skillshare",
   "app.project": "Proyecto",
   "app.subtitle": "Panel web",
   "audit.empty.allPassed.description": "No se detectaron patrones maliciosos ni amenazas de seguridad",

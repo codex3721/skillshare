@@ -7,7 +7,7 @@
    ═════════════════════════════════════════════════════════════ */
 
 .ss-skill-editor {
-  font-family: var(--font-hand, 'DM Sans', system-ui, sans-serif);
+  font-family: var(--font-hand, system-ui, sans-serif);
   min-height: 100vh;
   display: flex;
   flex-direction: column;

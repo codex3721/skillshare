@@ -58,7 +58,7 @@
   "api.error.unauthorized": "Você não tem autorização para executar esta ação.",
   "api.error.validation": "Alguns campos precisam de atenção.",
   "api.invalidJson": "Resposta JSON inválida: {snippet}",
-  "app.name": "skillshare",
+  "app.name": "Skillshare",
   "app.project": "Projeto",
   "app.subtitle": "Painel web",
   "audit.empty.allPassed.description": "Nenhum padrão malicioso ou ameaça de segurança detectado",

@@ -58,7 +58,7 @@
   "api.error.unauthorized": "この操作を実行する権限がありません。",
   "api.error.validation": "一部の項目を確認してください。",
   "api.invalidJson": "無効な JSON 応答: {snippet}",
-  "app.name": "skillshare",
+  "app.name": "Skillshare",
   "app.project": "プロジェクト",
   "app.subtitle": "Web ダッシュボード",
   "audit.empty.allPassed.description": "悪意のあるパターンやセキュリティ脅威は検出されませんでした",

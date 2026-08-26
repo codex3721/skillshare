@@ -58,7 +58,7 @@
   "api.error.unauthorized": "Du bist für diese Aktion nicht berechtigt.",
   "api.error.validation": "Einige Felder benötigen Aufmerksamkeit.",
   "api.invalidJson": "Ungültige JSON-Antwort: {snippet}",
-  "app.name": "skillshare",
+  "app.name": "Skillshare",
   "app.project": "Projekt",
   "app.subtitle": "Web-Dashboard",
   "audit.empty.allPassed.description": "Keine schädlichen Muster oder Sicherheitsbedrohungen gefunden",

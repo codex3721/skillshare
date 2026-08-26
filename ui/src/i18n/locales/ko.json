@@ -58,7 +58,7 @@
   "api.error.unauthorized": "이 작업을 수행할 권한이 없습니다.",
   "api.error.validation": "일부 필드를 확인해야 합니다.",
   "api.invalidJson": "잘못된 JSON 응답: {snippet}",
-  "app.name": "skillshare",
+  "app.name": "Skillshare",
   "app.project": "프로젝트",
   "app.subtitle": "웹 대시보드",
   "audit.empty.allPassed.description": "악성 패턴이나 보안 위협이 감지되지 않았습니다",

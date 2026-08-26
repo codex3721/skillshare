@@ -58,7 +58,7 @@
   "api.error.unauthorized": "اجازه انجام این عملیات را ندارید.",
   "api.error.validation": "برخی فیلدها نیاز به بررسی دارند.",
   "api.invalidJson": "پاسخ JSON نامعتبر: {snippet}",
-  "app.name": "skillshare",
+  "app.name": "Skillshare",
   "app.project": "پروژه",
   "app.subtitle": "داشبورد وب",
   "audit.empty.allPassed.description": "هیچ الگوی مخرب یا تهدید امنیتی شناسایی نشد",

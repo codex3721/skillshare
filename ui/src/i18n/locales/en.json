@@ -129,7 +129,7 @@
   "api.error.unauthorized": "You are not authorized to perform this action.",
   "api.error.validation": "Some fields need another look.",
   "api.invalidJson": "Invalid JSON response: {snippet}",
-  "app.name": "skillshare",
+  "app.name": "Skillshare",
   "app.project": "Project",
   "app.subtitle": "Web Dashboard",
   "batchUninstall.action.clear": "Clear",

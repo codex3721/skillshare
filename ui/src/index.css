@@ -26,8 +26,8 @@
   --color-accent-light: rgba(220, 69, 56, 0.1);
 
   /* Typography */
-  --font-hand: 'DM Sans', sans-serif;
-  --font-heading: 'DM Sans', sans-serif;
+  --font-hand: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
+  --font-heading: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
   --font-mono: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
 
   /* Shadows — subtle, no hard offset */
@@ -89,9 +89,9 @@
    ═══════════════════════════════════════════ */
 
 [data-theme="playful"] {
-  /* Font override — only headings use Caveat, body stays DM Sans */
-  --font-heading: 'Caveat', 'DM Sans', sans-serif;
-  /* --font-hand is NOT overridden — body text remains DM Sans for readability */
+  /* Font override — system fonts only (no external CDN dependency) */
+  --font-heading: 'Chalkboard SE', 'Comic Sans MS', 'Marker Felt', 'Bradley Hand', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  /* --font-hand is NOT overridden — body text remains system stack for readability */
 
   /* Radius overrides — larger, softer */
   --radius-sm: 12px;

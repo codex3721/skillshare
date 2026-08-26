@@ -58,7 +58,7 @@
   "api.error.unauthorized": "Vous n'êtes pas autorisé à effectuer cette action.",
   "api.error.validation": "Certains champs nécessitent une vérification.",
   "api.invalidJson": "Réponse JSON invalide : {snippet}",
-  "app.name": "skillshare",
+  "app.name": "Skillshare",
   "app.project": "Projet",
   "app.subtitle": "Tableau de bord web",
   "audit.empty.allPassed.description": "Aucun schéma malveillant ou menace de sécurité détecté",

@@ -58,7 +58,7 @@
   "api.error.unauthorized": "Anda tidak berwenang melakukan tindakan ini.",
   "api.error.validation": "Beberapa bidang perlu diperiksa.",
   "api.invalidJson": "Respons JSON tidak valid: {snippet}",
-  "app.name": "skillshare",
+  "app.name": "Skillshare",
   "app.project": "Proyek",
   "app.subtitle": "Dasbor web",
   "audit.empty.allPassed.description": "Tidak ada pola berbahaya atau ancaman keamanan yang terdeteksi",

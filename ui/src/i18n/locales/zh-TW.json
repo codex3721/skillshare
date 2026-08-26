@@ -58,7 +58,7 @@
   "api.error.unauthorized": "你目前沒有權限做這個操作。",
   "api.error.validation": "有些欄位需要再確認一下。",
   "api.invalidJson": "伺服器回傳的 JSON 無法解析：{snippet}",
-  "app.name": "skillshare",
+  "app.name": "Skillshare",
   "app.project": "專案",
   "app.subtitle": "網頁儀表板",
   "audit.empty.allPassed.description": "未偵測到惡意模式或安全威脅",

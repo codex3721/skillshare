@@ -17,7 +17,7 @@ interface ThemeContextValue {
 }
 
 const ThemeContext = createContext<ThemeContextValue>({
-  style: 'playful',
+  style: 'clean',
   setStyle: () => {},
   modePreference: 'light',
   setModePreference: () => {},
@@ -52,8 +52,8 @@ applyUrlThemeParam();
 
 function getInitialStyle(): Style {
   const stored = localStorage.getItem('skillshare-style');
-  if (stored === 'clean') return 'clean';
-  return 'playful';
+  if (stored === 'playful') return 'playful';
+  return 'clean';
 }
 
 function getInitialModePreference(): ModePreference {

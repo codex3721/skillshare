@@ -1,0 +1,43 @@
+# Deployment compose — runs the skillshare UI server using the binary baked
+# into the sandbox image (no source mount, no Go caches, fast startup).
+#
+# `name` is set explicitly to avoid clashing with other projects whose
+# directory is also called `docker/` — Compose would otherwise reuse the
+# same project name (and the same `docker_default` network) for both stacks.
+#
+# Build both architectures once (from repo root):
+#   docker buildx build --platform linux/amd64 -t skillshare:amd64 --load \
+#       -f docker/sandbox/Dockerfile .
+#   docker buildx build --platform linux/arm64 -t skillshare:arm64 --load \
+#       -f docker/sandbox/Dockerfile .
+#   docker save skillshare:amd64 skillshare:arm64 -o skillshare-images.tar
+#
+# On the target machine (after `docker load -i skillshare-images.tar`):
+#   cd docker && docker compose up -d
+#
+# Persistence:
+#   ./volumes/config  -> ~/.config/skillshare  (config.yaml + skills source)
+#   UI cache is container-local (re-populated from the image on each start).
+
+name: skillshare
+
+services:
+  skillshare:
+    # ARC=amd64 on an x86_64 host.
+    image: skillshare:${ARC:-arm64}
+    container_name: skillshare
+    hostname: skillshare
+    build:
+      context: ..
+      dockerfile: docker/sandbox/Dockerfile
+    command: ["skillshare", "ui", "-g", "--no-open", "--host", "0.0.0.0"]
+    ports:
+      - "19420:19420"
+    environment:
+      HOME: /root
+      GIT_SSL_NO_VERIFY: ${GIT_SSL_NO_VERIFY:-true}
+    volumes:
+      - ./volumes/config:/root/.config/skillshare
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
